@@ -2,40 +2,37 @@
 
 int main() {
     int score;
-    while (1)
-    {
-    	printf("Enter 0 or 1 to STOP\n");
+    while (1) {
+        printf("Enter 0 or 1 to STOP\n");
         printf("Enter The NFL score: ");
         scanf("%d", &score);
-
-        if (score <= 1)
-        {
-        	printf("Program Error");
+        if (score == 0 || score == 1) {
             break;
         }
 
-        printf("Possible combinations of scoring plays:\n");
-
-    
-        int TD, FG, SF, TD2, TD1;
-        int total;
-
-        for (TD2 = 0; TD2 <= score/8 +1; TD2++) {
-            for (TD1 = 0; TD1 <=(score-TD2*8)/7 +1; TD1++) {
-                for (TD = 0; TD <=(score-TD2*8-TD1*7)/6 +1; TD++) {
-                    for (FG = 0; FG <=(score-TD2*8-TD1*7-TD*6)/3 +1; FG++) {
-                        for (SF = 0; SF <=(score-TD2*8-TD1*7-TD*6-FG*3)/2 +1; SF++) {
-                            score = TD2*8 + TD1*7 + TD*6 + FG*3 + SF*2;
-                            if (total ==score) {
-                                printf("%d TD + 2pt, %d TD + FG, %d TD, %d 3pt FG, %d Safety\n", TD2, TD1, TD, FG, SF);
+        for (int eight = 0; eight <= score / 8; ++eight) {
+            for (int seven = 0; seven <= (score - eight * 8) / 7; ++seven) {
+                for (int six = 0; six <= (score - eight * 8 - seven * 7) / 6; ++six) {
+                    for (int three = 0; three <= (score - eight * 8 - seven * 7 - six * 6) / 3;
+                         ++three) {
+                        for (int two = 0;
+                             two <= (score - eight * 8 - seven * 7 - six * 6 - three * 3) / 2;
+                             ++two) {
+                            if (score - eight * 8 - seven * 7 - six * 6 - three * 3 - two * 2 ==
+                                0) {
+                                printf(
+                                    "%d TD + 2pt, %d TD + FG, %d TD, %d 3pt FG, %d Safety\n",
+                                    eight,
+                                    seven,
+                                    six,
+                                    three,
+                                    two);
                             }
                         }
                     }
                 }
             }
         }
-
-        printf("\n");
-    }           
-        return 0;
+    }
+    return 0;
 }
